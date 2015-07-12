@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D692F811B5315A30084B8BA /* italk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D692F801B5315A30084B8BA /* italk.swift */; };
 		3D9013401B51CFF600FA0EFB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D90133F1B51CFF600FA0EFB /* AppDelegate.swift */; };
 		3D9013421B51CFF600FA0EFB /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9013411B51CFF600FA0EFB /* FirstViewController.swift */; };
 		3D9013441B51CFF600FA0EFB /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3D9013431B51CFF600FA0EFB /* SecondViewController.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3D692F801B5315A30084B8BA /* italk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = italk.swift; sourceTree = "<group>"; };
 		3D90133A1B51CFF600FA0EFB /* italk2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = italk2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D90133E1B51CFF600FA0EFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3D90133F1B51CFF600FA0EFB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -86,6 +88,7 @@
 				3D9013481B51CFF600FA0EFB /* Images.xcassets */,
 				3D90134A1B51CFF600FA0EFB /* LaunchScreen.xib */,
 				3D90133D1B51CFF600FA0EFB /* Supporting Files */,
+				3D692F801B5315A30084B8BA /* italk.swift */,
 			);
 			path = italk2;
 			sourceTree = "<group>";
@@ -164,6 +167,11 @@
 				TargetAttributes = {
 					3D9013391B51CFF600FA0EFB = {
 						CreatedOnToolsVersion = 6.4;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 0;
+							};
+						};
 					};
 					3D9013501B51CFF600FA0EFB = {
 						CreatedOnToolsVersion = 6.4;
@@ -218,6 +226,7 @@
 				3D9013441B51CFF600FA0EFB /* SecondViewController.swift in Sources */,
 				3D9013401B51CFF600FA0EFB /* AppDelegate.swift in Sources */,
 				3D9013421B51CFF600FA0EFB /* FirstViewController.swift in Sources */,
+				3D692F811B5315A30084B8BA /* italk.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -415,6 +424,7 @@
 				3D90135D1B51CFF600FA0EFB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		3D90135E1B51CFF600FA0EFB /* Build configuration list for PBXNativeTarget "italk2Tests" */ = {
 			isa = XCConfigurationList;
@@ -423,6 +433,7 @@
 				3D9013601B51CFF600FA0EFB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
