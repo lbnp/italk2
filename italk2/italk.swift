@@ -9,7 +9,8 @@
 import Foundation
 
 class Italk {
-    var sockHandle: NSFileHandle?
+    var inputStream: NSInputStream?
+    var outputStream: NSOutputStream?
     var remainData: NSData?
     var isConnected: Bool
     var isLoggedIn: Bool
@@ -20,24 +21,27 @@ class Italk {
         isLoggedIn = false
     }
 
-    func connect(serverName: NSString, port: Int) {
+    func connect(serverName: String, port: Int) {
         if isConnected {
             disconnect()
         }
         
-        //var hostName = CFHOst
+        NSStream.getStreamsToHostWithName(serverName, port: port, inputStream: &inputStream, outputStream: &outputStream)
+        inputStream!.open()
+        outputStream!.open()
     }
 
     func disconnect() {
         if isLoggedIn {
             let quitString = "/q\n"
             let quitData = quitString.dataUsingEncoding(NSISO2022JPStringEncoding)
-            sockHandle?.writeData(quitData!)
+            outputStream!.write(UnsafePointer<UInt8>(quitData!.bytes), maxLength: quitData!.length)
             isLoggedIn = false
         }
         
         NSNotificationCenter.defaultCenter().removeObserver(self)
-        sockHandle?.closeFile()
+        outputStream?.close()
+        inputStream?.close()
         isConnected = false
     }
     
@@ -47,7 +51,7 @@ class Italk {
     
     func sendMessage(message: NSString) {
         let messageData = message.dataUsingEncoding(NSISO2022JPStringEncoding, allowLossyConversion: true)
-        sockHandle?.writeData(messageData!)
+        outputStream?.write(UnsafePointer<UInt8>(messageData!.bytes), maxLength: messageData!.length)
     }
     
     func sendLine(message: NSString) {
