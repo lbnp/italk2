@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Italk {
+class Italk : NSObject, NSStreamDelegate {
     var inputStream: NSInputStream?
     var outputStream: NSOutputStream?
     var remainData: NSData?
@@ -16,7 +16,7 @@ class Italk {
     var isLoggedIn: Bool
     //@IBOutlet var theController:
 
-    init() {
+    override init() {
         isConnected = false
         isLoggedIn = false
     }
@@ -27,8 +27,53 @@ class Italk {
         }
         
         NSStream.getStreamsToHostWithName(serverName, port: port, inputStream: &inputStream, outputStream: &outputStream)
+        
+        inputStream!.delegate = self
+        outputStream!.delegate = self
+        inputStream!.scheduleInRunLoop(NSRunLoop.currentRunLoop(), forMode: NSDefaultRunLoopMode)
+        outputStream!.scheduleInRunLoop(NSRunLoop.currentRunLoop(), forMode: NSDefaultRunLoopMode)
+        
         inputStream!.open()
         outputStream!.open()
+    }
+    
+    func stream(aStream: NSStream, handleEvent eventCode: NSStreamEvent) {
+        switch (eventCode) {
+        case NSStreamEvent.OpenCompleted:
+            break
+        case NSStreamEvent.HasBytesAvailable:
+            var buffer = [UInt8](count: 4096, repeatedValue: 0)
+            if aStream == inputStream! {
+                while inputStream!.hasBytesAvailable {
+                    let len = inputStream!.read(&buffer, maxLength: buffer.count)
+                    if len > 0 {
+                        let output = NSString(bytes: &buffer, length: buffer.count, encoding: NSISO2022JPStringEncoding)
+                        if !isLoggedIn {
+                            if scanPromptForHandle(output) {
+                                let handle = NSUserDefaults.standardUserDefaults().stringForKey("handle")
+                                if (handle != nil) {
+                                    sendLine(handle!)
+                                } else {
+                                    sendLine("kamo")
+                                }
+                            }
+                            isLoggedIn = true
+                        }
+                    }
+                }
+            }
+            break
+        case NSStreamEvent.ErrorOccurred:
+            disconnect()
+            break
+        case NSStreamEvent.EndEncountered:
+            disconnect()
+            break
+        case NSStreamEvent.HasSpaceAvailable:
+            break
+        default:
+            break
+        }
     }
 
     func disconnect() {
@@ -39,14 +84,11 @@ class Italk {
             isLoggedIn = false
         }
         
-        NSNotificationCenter.defaultCenter().removeObserver(self)
-        outputStream?.close()
-        inputStream?.close()
+        outputStream!.removeFromRunLoop(NSRunLoop.currentRunLoop(), forMode: NSDefaultRunLoopMode)
+        inputStream!.removeFromRunLoop(NSRunLoop.currentRunLoop(), forMode: NSDefaultRunLoopMode)
+        outputStream!.close()
+        inputStream!.close()
         isConnected = false
-    }
-    
-    func receiveMessage(notification: NSNotification) {
-        
     }
     
     func sendMessage(message: NSString) {

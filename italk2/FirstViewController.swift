@@ -10,6 +10,11 @@ import UIKit
 
 class FirstViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate, UIScrollViewDelegate {
 
+    var italk : Italk?
+    
+    @IBAction func connectClicked(sender: UIButton) {
+        italk?.connect("main.italk.ne.jp", port: 12345)
+    }
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var logTextView: UITextView!
     @IBOutlet weak var chatTextField: UITextField!
@@ -29,7 +34,8 @@ class FirstViewController: UIViewController, UITextFieldDelegate, UITextViewDele
         scrollView.delegate = self
         chatTextField.delegate = self
         logTextView.delegate = self
-        logTextView.text = nil;
+        logTextView.text = nil
+        italk = Italk()
     }
 
     override func didReceiveMemoryWarning() {
