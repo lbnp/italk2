@@ -23,7 +23,7 @@ class FirstViewController: UIViewController, UITextFieldDelegate, UITextViewDele
         chatTextField.endEditing(true)
     }
     func sendText() {
-        let textToSend = chatTextField.text + "\n"
+        let textToSend = chatTextField.text! + "\n"
         logTextView.text = logTextView.text + textToSend
         chatTextField.text = nil
         chatTextField.resignFirstResponder()
