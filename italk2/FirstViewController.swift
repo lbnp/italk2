@@ -3,7 +3,7 @@
 //  italk2
 //
 //  Created by Jun Kamoshima on 2015/07/12.
-//  Copyright (c) 2015年 lbnp. All rights reserved.
+//  Copyright (c) 2015 lbnp. All rights reserved.
 //
 
 import UIKit
