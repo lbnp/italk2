@@ -162,6 +162,8 @@
 		3D9013321B51CFF600FA0EFB /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
 				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = lbnp;
 				TargetAttributes = {

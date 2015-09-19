@@ -63,7 +63,7 @@ class FirstViewController: UIViewController, UITextFieldDelegate, UITextViewDele
         let userInfo = notification.userInfo!
         let keyboardScreenEndFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).CGRectValue()
         let myBoundSize: CGSize = UIScreen.mainScreen().bounds.size
-        var textLimit = chatTextField.frame.origin.y + chatTextField.frame.height + 8.0
+        let textLimit = chatTextField.frame.origin.y + chatTextField.frame.height + 8.0
         let keyboardLimit = myBoundSize.height - keyboardScreenEndFrame.size.height
         
         if textLimit >= keyboardLimit {
