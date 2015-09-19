@@ -2,7 +2,7 @@
 //  FirstViewController.swift
 //  italk2
 //
-//  Created by 鴨島 潤 on 2015/07/12.
+//  Created by Jun Kamoshima on 2015/07/12.
 //  Copyright (c) 2015年 lbnp. All rights reserved.
 //
 
